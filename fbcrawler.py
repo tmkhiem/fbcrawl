@@ -23,15 +23,23 @@ print(f'Loading links from {links_file_to_visit} --> {result_file}')
 with open(links_file_to_visit, 'r') as f:
     links = [line.strip() for line in f.readlines()]
 
+previous_results_files = os.listdir()
+previous_results_files = [f for f in previous_results_files if f.endswith('.tsv')]
+
 # Check if the result file exists
-if os.path.isfile(result_file):
-    # Load all the URLs from the result file
-    urls_visited = set()
-    with open(result_file, 'r', newline='') as f:
-        reader = csv.reader(f, delimiter='\t')
-        next(reader)  # Skip the header row
-        for row in reader:
-            urls_visited.add(row[0])
+for previous_results_file in previous_results_files:
+    try:
+        if os.path.isfile(result_file):
+            # Load all the URLs from the result file
+            urls_visited = set()
+            with open(result_file, 'r', newline='') as f:
+                reader = csv.reader(f, delimiter='\t')
+                next(reader)  # Skip the header row
+                for row in reader:
+                    urls_visited.add(row[0])
+    except:
+        print('Error loading result file:', result_file)
+        continue
 
 options = webdriver.FirefoxOptions()
 options.binary_location = r"D:\tools\FirefoxPortable\App\Firefox64\firefox.exe"
