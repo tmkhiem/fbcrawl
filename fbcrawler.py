@@ -122,36 +122,38 @@ for i in range(len(links)):
                   "img_date_str": '', "error": str(e)}
 
     results.append(result)
-
-    with open(result_file, 'w', newline='\n', encoding='utf8') as f:
-        writer = csv.writer(f, delimiter='\t')
-        writer.writerow(['url', 'img_url', 'date_str', 'year',
-                        'month', 'day', 'hour', 'minute', 'filename', 'error'])
-        for result in results:
-
-            try:
-                if result['img_date_str']:
-                    img_date = parse_time(result['img_date_str'])
-                else:
-                    img_date = datetime(1970, 1, 1)
-            except:
-                img_date = datetime(1970, 1, 1)
-
-            try:
-                filename = os.path.basename(urlparse(result['img_url']).path)
-            except:
-                filename = ''
-
-            writer.writerow([
-                result['url'],
-                result['img_url'],
-                result['img_date_str'],
-                img_date.year,
-                img_date.month,
-                img_date.day,
-                img_date.hour,
-                img_date.minute,
-                filename,
-                ''])
-
+    
 browser.quit()
+
+with open(result_file, 'w', newline='\n', encoding='utf8') as f:
+    writer = csv.writer(f, delimiter='\t')
+    writer.writerow(['url', 'img_url', 'date_str', 'year',
+                    'month', 'day', 'hour', 'minute', 'filename', 'error'])
+    for result in results:
+
+        try:
+            if result['img_date_str']:
+                img_date = parse_time(result['img_date_str'])
+            else:
+                img_date = datetime(1970, 1, 1)
+        except:
+            img_date = datetime(1970, 1, 1)
+
+        try:
+            filename = os.path.basename(urlparse(result['img_url']).path)
+        except:
+            filename = ''
+
+        writer.writerow([
+            result['url'],
+            result['img_url'],
+            result['img_date_str'],
+            img_date.year,
+            img_date.month,
+            img_date.day,
+            img_date.hour,
+            img_date.minute,
+            filename,
+            ''])
+
+

@@ -13,7 +13,7 @@
     - Run this code in console:
 
     ```javscript
-    for (i=0; i<500;i++) {await new Promise(r => setTimeout(r, 500));
+    for (i=0; i<1000;i++) {await new Promise(r => setTimeout(r, 200));
     window.scrollTo(0, document.body.scrollHeight);}
     ```
 
@@ -33,11 +33,21 @@
         return results;
     }
 
-    s = new Set()
-    getElementsByXPath("//a[contains(@href,'photo.php')]/@href").forEach(item=>s.add(item.value))
     str = ''
+    s = new Set()
+    getElementsByXPath("//a[contains(@href,'/photo.php')]/@href").forEach(item=>s.add(item.value))
     s.forEach(e=>str+=e+'\n')
-    console.log(str)
+    s = new Set()
+    getElementsByXPath("//a[contains(@href,'/photos')]/@href").forEach(item=>s.add(item.value))
+    s.forEach(e=>str+=e+'\n')
+    var blob = new Blob([str], {type: 'text/plain'});
+    var url = window.URL.createObjectURL(blob);
+    var a = document.createElement('a');
+    a.href = url;
+    a.download = 'links.txt';
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
     ```
 
     - Copy the output to a txt file
