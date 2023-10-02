@@ -72,7 +72,7 @@ def try_get_element(xpath, retries=3, timeout=10, refresh_action=None):
 
 
 #xpathDateOuter = "//span[contains(text(), 'Tháng')]"
-xpathCloseButton = '//div[@role="dialog"]//div[@aria-label="Close"]//i'
+xpathCloseButton = '//div[@role="dialog"]//div[@aria-label="Close"]'
 xpathDateOuter = "//span/span/a/span"
 xpathDateInner = "//span[@role='tooltip']"
 xpathImg = "//img[@data-visualcompletion='media-vc-image']"
