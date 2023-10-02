@@ -25,13 +25,14 @@ with open(links_file_to_visit, 'r') as f:
 
 previous_results_files = os.listdir()
 previous_results_files = [f for f in previous_results_files if f.endswith('.tsv')]
+urls_visited = set()
 
 # Check if the result file exists
 for previous_results_file in previous_results_files:
     try:
         if os.path.isfile(result_file):
             # Load all the URLs from the result file
-            urls_visited = set()
+            
             with open(result_file, 'r', newline='') as f:
                 reader = csv.reader(f, delimiter='\t')
                 next(reader)  # Skip the header row
