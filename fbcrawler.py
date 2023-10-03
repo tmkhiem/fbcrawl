@@ -177,22 +177,22 @@ def write_results(result_file, results):
             except:
                 img_date = datetime(1970, 1, 1)
 
-            try:
-                filename = os.path.basename(urlparse(result['img_url']).path)
-            except:
-                filename = ''
+        try:
+            filename = os.path.basename(urlparse(result['img_url']).path)
+        except:
+            filename = ''
 
-            writer.writerow([
-                result['url'],
-                result['img_url'],
-                result['img_date_str'],
-                img_date.year,
-                img_date.month,
-                img_date.day,
-                img_date.hour,
-                img_date.minute,
-                filename,
-                ''])
+        writer.writerow([
+            result['url'],
+            result['img_url'],
+            result['img_date_str'],
+            img_date.year,
+            img_date.month,
+            img_date.day,
+            img_date.hour,
+            img_date.minute,
+            filename,
+            ''])
 
 try:
     for i in range(len(links)):
