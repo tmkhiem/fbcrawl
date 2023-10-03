@@ -5,11 +5,19 @@
     "version": "0.2.0",
     "configurations": [
         {
-            "name": "Python: Current File",
+            "name": "Python: Crawler",
             "type": "python",
             "request": "launch",
             "program": "fbcrawler.py",
             "args": ["--firefox", "D:\\Downloads\\FirefoxPortableLegacy115\\App\\Firefox64\\firefox.exe", "inputs\\afp-1.txt"],
+            "console": "integratedTerminal",
+            "justMyCode": true
+        },
+        {
+            "name": "Current File",
+            "type": "python",
+            "request": "launch",
+            "program": "${file}",
             "console": "integratedTerminal",
             "justMyCode": true
         }
