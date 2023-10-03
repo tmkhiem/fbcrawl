@@ -48,8 +48,8 @@ print(f' - Loading links from {links_file_to_visit}')
 with open(links_file_to_visit, 'r') as f:
     links = [line.strip() for line in f.readlines()]
 
-print(' - Loaded', len(links), 'links')
-print(' - Saving results to', result_file)
+print(' - Loaded', len(links), 'links to scrape')
+print(' - Results will be saved to:', result_file)
 print()
 
 output_directory = Path('outputs').mkdir(parents=True, exist_ok=True)
@@ -96,8 +96,11 @@ if not args.output:
 options = webdriver.FirefoxOptions()
 options.binary_location = args.firefox
 options.add_argument('-headless')
+profile = webdriver.FirefoxProfile()
+profile.set_preference('permissions.default.image', 2)
 
 browser = webdriver.Firefox(options=options, service=Service(executable_path=args.gecko))
+
 
 try:
     alert = Alert(browser)
@@ -137,8 +140,6 @@ xpathDateOuter = "//span/span/a/span"
 xpathDateInner = "//span[@role='tooltip']"
 xpathImg = "//img[@data-visualcompletion='media-vc-image']"
 
-
-
 def visit_link(url: str):    
     browser.get(url)
     time.sleep(0.5)
@@ -177,22 +178,22 @@ def write_results(result_file, results):
             except:
                 img_date = datetime(1970, 1, 1)
 
-        try:
-            filename = os.path.basename(urlparse(result['img_url']).path)
-        except:
-            filename = ''
+            try:
+                filename = os.path.basename(urlparse(result['img_url']).path)
+            except:
+                filename = ''
 
-        writer.writerow([
-            result['url'],
-            result['img_url'],
-            result['img_date_str'],
-            img_date.year,
-            img_date.month,
-            img_date.day,
-            img_date.hour,
-            img_date.minute,
-            filename,
-            ''])
+            writer.writerow([
+                result['url'],
+                result['img_url'],
+                result['img_date_str'],
+                img_date.year,
+                img_date.month,
+                img_date.day,
+                img_date.hour,
+                img_date.minute,
+                filename,
+                ''])
 
 try:
     for i in range(len(links)):
