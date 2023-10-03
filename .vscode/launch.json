@@ -9,7 +9,7 @@
             "type": "python",
             "request": "launch",
             "program": "fbcrawler.py",
-            "args": ["sample.txt"],
+            "args": ["--firefox", "D:\\Downloads\\FirefoxPortableLegacy115\\App\\Firefox64\\firefox.exe", "inputs\\sample.txt"],
             "console": "integratedTerminal",
             "justMyCode": true
         }
