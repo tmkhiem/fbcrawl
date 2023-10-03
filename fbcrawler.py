@@ -93,11 +93,12 @@ if not args.output:
             print('Error loading result file:', previous_results_file, ' --> skipped')
             continue
 
+profile = webdriver.FirefoxProfile()
+profile.set_preference('permissions.default.image', 2)
 options = webdriver.FirefoxOptions()
 options.binary_location = args.firefox
 options.add_argument('-headless')
-profile = webdriver.FirefoxProfile()
-profile.set_preference('permissions.default.image', 2)
+options.profile = profile
 
 browser = webdriver.Firefox(options=options, service=Service(executable_path=args.gecko))
 
